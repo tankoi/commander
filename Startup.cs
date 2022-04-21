@@ -1,14 +1,11 @@
+using Commander.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Commander
 {
@@ -24,7 +21,15 @@ namespace Commander
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContextPool<CommanderContext>(options =>
+            {
+                var connectionString = Configuration.GetConnectionString("CommanderConnection");
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            });
+
             services.AddControllers();
+
+            services.AddScoped<ICommanderRepository, MockCommanderRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
