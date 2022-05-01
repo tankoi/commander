@@ -29,7 +29,9 @@ namespace Commander
 
             services.AddControllers();
 
-            services.AddScoped<ICommanderRepository, MockCommanderRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped<ICommanderRepository, MySqlCommanderRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
