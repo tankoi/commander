@@ -57,8 +57,8 @@ namespace Commander.Controllers
             return CreatedAtRoute(nameof(GetCommandById), new {Id = commandReadDto.Id}, commandReadDto);
         }
 
-        // PUT api/commands
-        [HttpPut]
+        // PUT api/commands/{id}
+        [HttpPut("{id}")]
         public ActionResult<CommandReadDto> UpdateCommand(int id, CommandUpdateDto commandDto)
         {
             var commandModel = _repository.GetCommandById(id);
