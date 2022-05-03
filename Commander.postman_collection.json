@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1b7375f7-f290-4b2d-b2a6-833f2d961833",
+		"_postman_id": "8e0fb778-0a22-4f39-8782-7ee8224c9a06",
 		"name": "Commander",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -83,6 +83,36 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"howTo\": \"Update database u\",\r\n    \"line\": \"dotnet ef database update u\",\r\n    \"platform\": \".NET Core u\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/commands/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"commands",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch command",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/howto\",\r\n        \"value\": \"Some new value\"\r\n    }\r\n]",
 					"options": {
 						"raw": {
 							"language": "json"
