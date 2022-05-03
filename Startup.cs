@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Newtonsoft.Json.Serialization;
 
 namespace Commander
 {
@@ -27,7 +28,11 @@ namespace Commander
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             });
 
-            services.AddControllers();
+            services
+                .AddControllers()
+                .AddNewtonsoftJson(
+                    x => x.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver()
+                );
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
